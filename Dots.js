@@ -1,10 +1,10 @@
 class Dots{
-    constructor(x, y){
+    constructor(x, y, r){
         this.target = createVector(x, y);
         this.pos = createVector(Math.random()*width, Math.random()*height);
         this.vel = p5.Vector.random2D();
         this.acc = createVector(x, y);
-        this.r = 8;
+        this.r = r;
         this.maxSpeed = 10;
         this.maxForce = 20;
         this.destroyed = false;
@@ -49,8 +49,6 @@ Dots.prototype.update = function(){
     this.acc.mult(0);
 }
 Dots.prototype.show = function(){
-    stroke(255);
-    strokeWeight(this.r);
     point(this.pos.x, this.pos.y);
 }
 class Letter{
