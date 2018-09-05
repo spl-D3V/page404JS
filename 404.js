@@ -52,6 +52,9 @@ function draw(){
     score.innerText = initialDots;
 }
 function updateBullets(){
+    push();
+    stroke(255, 125, 0);
+    strokeWeight(5);
     for (let i = nbullets-1; i > -1;  i--){
         bullets[i].update();
         bullets[i].show();
@@ -68,6 +71,7 @@ function updateBullets(){
             lbullets.splice(i,1);
         }
     }
+    pop();
 }
 function updateEnemies(){
     for (let i = initialDots-1; i > -1; i--){
