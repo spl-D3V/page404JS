@@ -1,0 +1,26 @@
+.container {
+    background-color:#606060;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    padding: 9px;
+    grid-gap: .5rem;
+}
+.juego {
+    grid-area: auto;
+}
+.puntos {
+    grid-area: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+}
+.score {
+    background-color: rgba(0,150,136,0.8);
+    box-shadow: 0 4px 8px 0 rgba(255,255,255,0.9);
+    border-radius: 5px;
+}
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+}
