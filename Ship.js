@@ -65,11 +65,8 @@ Bullet.prototype.update = function(){
     this.pos.add(this.vel);
 }
 Bullet.prototype.show = function(){
-    push();
-    stroke(255, 125, 0);
-    strokeWeight(5);
+    
     line(this.pos.x, this.pos.y, this.pos.x+20, this.pos.y);
-    pop();
 }
 Bullet.prototype.endScreen = function(){
     return (this.pos.x > width || this.pos.x < 0);

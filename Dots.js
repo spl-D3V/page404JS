@@ -3,7 +3,7 @@ class Dots{
         this.target = createVector(x, y);
         this.pos = createVector(Math.random()*width, Math.random()*height);
         this.vel = p5.Vector.random2D();
-        this.acc = createVector(x, y);
+        this.acc = createVector();
         this.r = r;
         this.maxSpeed = 10;
         this.maxForce = 20;
