@@ -10,6 +10,7 @@ let letters = [];
 let nLetters = 0;
 let lbullets = [];
 let score = 0;
+let radius = 8;
 
 function preload(){
     font = loadFont("pointfree.ttf");
@@ -22,10 +23,12 @@ function setup(){
     rectMode(CORNER);
     noFill();
     noSmooth();
+    stroke(255);
+    strokeWeight(radius);
     ship = new Ship(createVector(50, 150));
     let pts = font.textToPoints('404', 0.5*width, height/2, 150, {sampleFactor: 0.12, simplifyThreshold: 0})
     for (let i=0; i< pts.length; i++){
-        let ldot = new Dots(pts[i].x, pts[i].y);
+        let ldot = new Dots(pts[i].x, pts[i].y, radius);
         letterDots.push(ldot);
     }
     letters.push(new Letter(0.5*width, 0.15*height, 210, 60, createBufferMSG("ERROR", 230, 60, font, 70)));
