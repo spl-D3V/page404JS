@@ -16,27 +16,19 @@ let radius = 8;
 function preload(){
     font = loadFont("pointfree.ttf");
 }
-
 function setup(){
     let can = createCanvas(800, 600);
     can.parent(document.getElementById("canvasContainer"));
     score = document.getElementById("enemies");
     lifes = document.getElementById("lifes");
+    ship = new Ship(createVector(50, 150));
+    ship.init();
     rectMode(CORNER);
     noFill();
     noSmooth();
     stroke(255);
     strokeWeight(radius);
-    ship = new Ship(createVector(50, 150));
-    ship.init();
-    let pts = font.textToPoints('404', 0.5*width, height/2, 150, {sampleFactor: 0.12, simplifyThreshold: 0})
-    for (let i=0; i< pts.length; i++){
-        let ldot = new Dots(pts[i].x, pts[i].y, radius);
-        letterDots.push(ldot);
-    }
-    letters.push(new Letter(0.5*width, 0.15*height, 210, 60, createBufferMSG("ERROR", 230, 60, font, 70)));
-    letters.push(new Letter(0.5*width, 0.55*height, 120, 70, createBufferMSG("NOT", 130, 60, font, 70)));
-    letters.push(new Letter(0.5*width+170, 0.55*height, 210, 60, createBufferMSG("FOUND", 220, 60, font, 70)));
+    setupPoints();
 }
 function draw(){
     clear();
@@ -51,6 +43,16 @@ function draw(){
     obstacles = [];
     score.innerText = initialDots + nLetters;
     lifes.innerText = ship.life;
+}
+function setupPoints(){
+    let pts = font.textToPoints('404', 0.5*width, height/2, 150, {sampleFactor: 0.12, simplifyThreshold: 0})
+    for (let i=0; i< pts.length; i++){
+        let ldot = new Dots(pts[i].x, pts[i].y, radius);
+        letterDots.push(ldot);
+    }
+    letters.push(new Letter(0.5*width, 0.15*height, 210, 60, createBufferMSG("ERROR", 230, 60, font, 70)));
+    letters.push(new Letter(0.5*width, 0.55*height, 120, 70, createBufferMSG("NOT", 130, 60, font, 70)));
+    letters.push(new Letter(0.5*width+170, 0.55*height, 210, 60, createBufferMSG("FOUND", 220, 60, font, 70)));
 }
 function updateShip(){
     ship.update();
