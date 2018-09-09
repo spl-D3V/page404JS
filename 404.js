@@ -26,6 +26,7 @@ function setup(){
     stroke(255);
     strokeWeight(radius);
     ship = new Ship(createVector(50, 150));
+    ship.init();
     let pts = font.textToPoints('404', 0.5*width, height/2, 150, {sampleFactor: 0.12, simplifyThreshold: 0})
     for (let i=0; i< pts.length; i++){
         let ldot = new Dots(pts[i].x, pts[i].y, radius);
@@ -35,21 +36,28 @@ function setup(){
     letters.push(new Letter(0.5*width, 0.55*height, 120, 70, createBufferMSG("NOT", 130, 60, font, 70)));
     letters.push(new Letter(0.5*width+170, 0.55*height, 210, 60, createBufferMSG("FOUND", 220, 60, font, 70)));
 }
-
 function draw(){
     clear();
     nLetters = letters.length;
     nLetBulets = lbullets.length;
     initialDots = letterDots.length;
     nbullets = bullets.length;
-    ship.update();
-    ship.show();
-    obstacles.push({blt:false, pos:ship.pos.copy()});
+    updateShip();
     updateBullets();
     updateEnemies();
     joistick();
     obstacles = [];
-    score.innerText = initialDots;
+    score.innerText = initialDots + nLetters;
+}
+function updateShip(){
+    ship.update();
+    ship.isHit(lbullets);
+    if(ship.isAlive()){
+        ship.show();
+    }else{
+        noLoop();
+    }
+    obstacles.push({blt:false, pos:ship.pos.copy()});
 }
 function updateBullets(){
     push();
@@ -67,7 +75,7 @@ function updateBullets(){
     for (let i = nLetBulets-1; i > -1;  i--){
         lbullets[i].update();
         lbullets[i].show();
-        if(lbullets[i].endScreen()){
+        if(lbullets[i].endScreen() || lbullets[i].collision){
             lbullets.splice(i,1);
         }
     }
@@ -85,7 +93,7 @@ function updateEnemies(){
     }
     for (let i = nLetters-1; i > -1; i--){
         if(letters[i].isDead()){
-            letters.splice(i,0);
+            letters.splice(i,1);
         }else{
             if (frameCount >= 200){
                 letters[i].isHit(bullets);
