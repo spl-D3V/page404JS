@@ -66,7 +66,7 @@ Letter.prototype.update = function(cnt){
     this.pos.add(this.vel);
     if (cnt%200 === 0){
         this.vel = p5.Vector.random2D();
-        this.vel.setMag(6);
+        this.vel.setMag(5);
     }
     if(this.pos.x < 0 || (this.pos.x+this.w) > width){
         this.pos.x = this.pos.x < 0 ? 0 : width-this.w;
@@ -93,9 +93,9 @@ Letter.prototype.isDead = function(){
     return this.life === 0;
 }
 Letter.prototype.shot = function(_bullets, maxShots){
-    if(_bullets.length === maxShots){
+    if(_bullets.length >= maxShots){
         return false;
-    }else if(Math.random() > 0.4){
+    }else if(Math.random() < 0.4){
         let bullet = new Bullet(this.pos.copy(), -1)
         _bullets.push(bullet);
     }
