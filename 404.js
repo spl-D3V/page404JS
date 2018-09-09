@@ -10,6 +10,7 @@ let letters = [];
 let nLetters = 0;
 let lbullets = [];
 let score = 0;
+let lifes = 0;
 let radius = 8;
 
 function preload(){
@@ -20,6 +21,7 @@ function setup(){
     let can = createCanvas(800, 600);
     can.parent(document.getElementById("canvasContainer"));
     score = document.getElementById("enemies");
+    lifes = document.getElementById("lifes");
     rectMode(CORNER);
     noFill();
     noSmooth();
@@ -48,6 +50,7 @@ function draw(){
     joistick();
     obstacles = [];
     score.innerText = initialDots + nLetters;
+    lifes.innerText = ship.life;
 }
 function updateShip(){
     ship.update();

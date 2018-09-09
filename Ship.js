@@ -33,7 +33,7 @@ Ship.prototype.init = function(){
     }
 }
 Ship.prototype.show = function(){
-    if(Math.random() < 0.1){
+    if(Math.random() < 0.15){
         image(this.bufferLight[this.life], this.pos.x, this.pos.y-0.5*this.h);
     }else{
         image(this.bufferDark[this.life], this.pos.x, this.pos.y-0.5*this.h);
@@ -54,8 +54,8 @@ Ship.prototype.update = function(){
     if(this.vel.magSq() < 2){
         this.vel.mult(0);
     }
-    if(this.pos.x > width){
-        this.pos.x = width;
+    if((this.pos.x+this.w) > width){
+        this.pos.x = width-this.w;
     }else if(this.pos.x < 0){
         this.pos.x = 0;
     }else if(this.pos.y > height){
