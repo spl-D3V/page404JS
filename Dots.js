@@ -64,7 +64,7 @@ class Letter{
     }
 }
 Letter.prototype.init = function(){
-    let _colors = [[214, 1, 12], [255, 70, 0], [255, 100, 0], [252,236,20], [255,255,255]]
+    let _colors = [[214, 1, 12], [255, 70, 0], [255, 150, 0], [252,236,20], [255,255,255]]
     for(let i=0; i <= this.life; i++){
         let b = createGraphics(this.textbox.w, this.textbox.h);
         b.textFont(this.textbox.fnt);
