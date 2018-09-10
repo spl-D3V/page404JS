@@ -52,15 +52,28 @@ Dots.prototype.show = function(){
     point(this.pos.x, this.pos.y);
 }
 class Letter{
-    constructor(x, y, w, h, buffer){
+    constructor(x, y, w, h, textbox){
         this.pos = createVector(x, y);
         this.w = w;
         this.h = h;
         this.vel = createVector();
-        this.buffer = buffer;
+        this.textbox = textbox;
         this.life = 4;
         this.hit = false;
+        this.buffer = [];
     }
+}
+Letter.prototype.init = function(){
+    let _colors = [[214, 1, 12], [255, 70, 0], [255, 100, 0], [252,236,20], [255,255,255]]
+    for(let i=0; i <= this.life; i++){
+        let b = createGraphics(this.textbox.w, this.textbox.h);
+        b.textFont(this.textbox.fnt);
+        b.textSize(this.textbox.fs);
+        b.fill(_colors[i]);
+        b.text(this.textbox.msg, 0, this.textbox.h);
+        this.buffer.push(b);
+    }
+    this.textbox = undefined;
 }
 Letter.prototype.update = function(cnt){
     this.pos.add(this.vel);
@@ -101,17 +114,5 @@ Letter.prototype.shot = function(_bullets, maxShots){
     }
 }
 Letter.prototype.show = function(){
-    if (this.isDead()){
-        push();
-        fill(255, 100, 100);
-        rect(this.pos.x, this.pos.y, this.w, this.h);
-        pop();
-    }else if (this.hit){
-        push();
-        fill(255);
-        rect(this.pos.x, this.pos.y, this.w, this.h);
-        pop();
-    }else{
-        image(this.buffer, this.pos.x, this.pos.y);
-    }
+    image(this.buffer[this.life], this.pos.x, this.pos.y);
 }

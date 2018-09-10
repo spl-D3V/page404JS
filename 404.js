@@ -50,9 +50,10 @@ function setupPoints(){
         let ldot = new Dots(pts[i].x, pts[i].y, radius);
         letterDots.push(ldot);
     }
-    letters.push(new Letter(0.5*width, 0.15*height, 210, 60, createBufferMSG("ERROR", 230, 60, font, 70)));
-    letters.push(new Letter(0.5*width, 0.55*height, 120, 70, createBufferMSG("NOT", 130, 60, font, 70)));
-    letters.push(new Letter(0.5*width+170, 0.55*height, 210, 60, createBufferMSG("FOUND", 220, 60, font, 70)));
+    letters.push(new Letter(0.5*width, 0.15*height, 210, 60, {fnt: font, msg:"ERROR", w:230, h:60, fs:70}));
+    letters.push(new Letter(0.5*width, 0.55*height, 120, 70, {fnt: font, msg:"NOT", w:130, h:60, fs:70}));
+    letters.push(new Letter(0.5*width+170, 0.55*height, 210, 60, {fnt: font, msg:"FOUND", w:220, h:60, fs:70}));
+    letters.forEach(e => e.init());
 }
 function updateShip(){
     ship.update();
